@@ -37,11 +37,11 @@
     </header>
     <!-- END head -->
 
-    <section class="site-hero overlay" style="background-image: url({% static 'img/hero_1.jpg' %})">
+    <section class="site-hero overlay" style="background-image: url({{ homepage_background.background_image.url }})">
       <div class="container">
         <div class="row site-hero-inner justify-content-center align-items-center">
           <div class="col-md-10 text-center">
-            <h1 class="heading" data-aos="fade-up"><em>Villa</em> kurortiga xush kelibsiz</h1>
+            <h1 class="heading" data-aos="fade-up"><em>{{ homepage_background.title }}</em></h1>
             <p class="sub-heading mb-5" data-aos="fade-up" data-aos-delay="100">Bizning jahon darajasidagi mehmonxona va restoran kurortimizni kashf eting</p>
 {#            <p data-aos="fade-up" data-aos-delay="100"><a href="#" class="btn uppercase btn-primary mr-md-2 mr-0 mb-3 d-sm-inline d-block">Explore The Beauty</a> <a href="#" class="btn uppercase btn-outline-light d-sm-inline d-block">Download</a></p>#}
           </div>
@@ -59,62 +59,23 @@
           </div>
         </div>
         <div class="row">
+            {% for service in services %}
           <div class="col-lg-3 col-md-6 visit mb-3" data-aos="fade-right">
-            <a href="restaurant.html"><img src="{% static 'img/img_1.jpg' %}" alt="Image placeholder" class="img-fluid"> </a>
-            <h3><a href="restaurant.html">Taom &amp; Ichimliklar</a></h3>
+            <a href="restaurant.html"><img src="{{ service.images.url }}" alt="Image placeholder" class="img-fluid"> </a>
+            <h3><a href="restaurant.html">{{ service.name }}</a></h3>
             <div class="reviews-star float-left">
               <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star-half"></span>
-              <span class="ion-android-star-outline"></span>
+              <span class="{% if service.rate > 1 %}ion-android-star{% else %}ion-android-star-outline{% endif %}"></span>
+              <span class="{% if service.rate > 2 %}ion-android-star{% else %}ion-android-star-outline{% endif %}"></span>
+              <span class="{% if service.rate > 3 %}ion-android-star{% else %}ion-android-star-outline{% endif %}"></span>
+              <span class="{% if service.rate > 4 %}ion-android-star{% else %}ion-android-star-outline{% endif %}"></span>
             </div>
             <span class="reviews-count float-right">
-              3,239 reviews
+              {{ service.review_count }}
             </span>
           </div>
-          <div class="col-lg-3 col-md-6 visit mb-3" data-aos="fade-right" data-aos-delay="100">
-            <a href="restaurant.html"><img src="{% static 'img/img_2.jpg' %}" alt="Image placeholder" class="img-fluid"> </a>
-            <h3><a href="restaurant.html">Basseynlar</a></h3>
-            <div class="reviews-star float-left">
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star-half"></span>
-              <span class="ion-android-star-outline"></span>
-            </div>
-            <span class="reviews-count float-right">
-              4,921 reviews
-            </span>
-          </div>
-          <div class="col-lg-3 col-md-6 visit mb-3" data-aos="fade-right" data-aos-delay="200">
-            <a href="hotel.html"><img src="{% static 'img/img_4.jpg' %}" alt="Image placeholder" class="img-fluid"> </a>
-            <h3><a href="hotel.html">Mehmonxonalar</a></h3>
-            <div class="reviews-star float-left">
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star-outline"></span>
-            </div>
-            <span class="reviews-count float-right">
-              2,112 reviews
-            </span>
-          </div>
-          <div class="col-lg-3 col-md-6 visit mb-3" data-aos="fade-right" data-aos-delay="300">
-            <a href="yacht.html"><img src="{% static 'img/img_5.jpg' %}" alt="Image placeholder" class="img-fluid"> </a>
-            <h3><a href="yacht.html">Yaxtada sayr</a></h3>
-            <div class="reviews-star float-left">
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star"></span>
-              <span class="ion-android-star-outline"></span>
-            </div>
-            <span class="reviews-count float-right">
-              6,421 reviews
-            </span>
-          </div>
+            {% endfor %}
+
         </div>
       </div>
     </section>
@@ -131,24 +92,13 @@
         <div class="row">
           <div class="col-md-12">
             <div class="home-slider major-caousel owl-carousel mb-5" data-aos="fade-up" data-aos-delay="200">
+                {% for carusel in carusel_images %}
               <div class="slider-item">
-                <img src="{% static 'img/slider-1.jpg' %}" alt="Image placeholder" class="img-fluid">
+                <img src="{{ carusel.image.url }}" alt="Image placeholder" class="img-fluid">
               </div>
-              <div class="slider-item">
-                <img src="{% static 'img/slider-2.jpg' %}" alt="Image placeholder" class="img-fluid">
-              </div>
-              <div class="slider-item">
-                <img src="{% static 'img/slider-3.jpg' %}" alt="Image placeholder" class="img-fluid">
-              </div>
-              <div class="slider-item">
-                <img src="{% static 'img/slider-4.jpg' %}" alt="Image placeholder" class="img-fluid">
-              </div>
-              <div class="slider-item">
-                <img src="{% static 'img/slider-5.jpg' %}" alt="Image placeholder" class="img-fluid">
-              </div>
-              <div class="slider-item">
-                <img src="{% static 'img/slider-6.jpg' %}" alt="Image placeholder" class="img-fluid">
-              </div>
+                {% endfor %}
+
+
             </div>
             <!-- END slider -->
           </div>
@@ -163,35 +113,20 @@
     <section class="section blog-post-entry bg-pattern">
       <div class="container">
         <div class="row">
+            {% for reklom in reklom_card %}
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="100">
 
             <div class="media media-custom d-block mb-4">
-              <a href="#" class="mb-4 d-block"><img src="{% static 'img/img_1.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
+              <a href="#" class="mb-4 d-block"><img src="{{ reklom.image.url }}" alt="Image placeholder" class="img-fluid"></a>
               <div class="media-body">
 
-                <h2 class="mt-0 mb-3"><a href="#">Mazali taomlardan bahramad bo'ling</a></h2>
+                <h2 class="mt-0 mb-3"><a href="#">{{ reklom.title }}</a></h2>
               </div>
             </div>
 
           </div>
-          <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="200">
-            <div class="media media-custom d-block mb-4">
-              <a href="#" class="mb-4 d-block"><img src="{% static 'img/img_2.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
-              <div class="media-body">
+            {% endfor %}
 
-                <h2 class="mt-0 mb-3"><a href="#">Tatilni Villa kurortida o'tkazing</a></h2>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 col-sm-6 col-12 post" data-aos="fade-up" data-aos-delay="300">
-            <div class="media media-custom d-block mb-4">
-              <a href="#" class="mb-4 d-block"><img src="{% static 'img/img_3.jpg' %}" alt="Image placeholder" class="img-fluid"></a>
-              <div class="media-body">
-
-                <h2 class="mt-0 mb-3"><a href="#">Ajoyib manzaralardan bahramand bo'ling</a></h2>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
